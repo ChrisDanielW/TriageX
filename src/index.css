@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Emergency Dashboard Design System - Medical Grade Interface */
+
+@layer base {
+  :root {
+    /* Default to light theme so bg-background/text-foreground map to a light UI */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* Medical blue theme (kept) */
+    --primary: 217 91% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 222.2 84% 4.9%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 215 20% 45%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 222 20% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 217 91% 60%;
+
+    /* Severity color system */
+    --critical: 0 84% 60%;
+    --critical-foreground: 210 40% 98%;
+    --serious: 25 95% 53%;
+    --serious-foreground: 222 20% 8%;
+    --moderate: 45 93% 47%;
+    --moderate-foreground: 222 20% 8%;
+
+    /* Medical status colors */
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 222 20% 8%;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(217 91% 60%),
+      hsl(217 91% 50%)
+    );
+    --gradient-card: linear-gradient(
+      135deg,
+      hsl(0 0% 100%),
+      hsl(0 0% 98%)
+    );
+
+    --shadow-card: 0 4px 12px rgba(16,24,40,0.06);
+    --shadow-patient: 0 8px 20px rgba(16,24,40,0.06);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .light {
+    /* Light theme for daytime use if needed */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom scrollbar for medical displays */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+  }
+}
+
+@layer components {
+  /* Patient severity variants */
+  .patient-critical {
+    /* light theme: white card with subtle critical accent */
+    background-color: white;
+    border-left: 4px solid hsl(var(--critical));
+    border-color: hsl(var(--border));
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .patient-serious {
+    /* light theme: white card with subtle serious accent */
+    background-color: white;
+    border-left: 4px solid hsl(var(--serious));
+    border-color: hsl(var(--border));
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+
+  .patient-moderate {
+    /* light theme: white card with subtle moderate accent */
+    background-color: white;
+    border-left: 4px solid hsl(var(--moderate));
+    border-color: hsl(var(--border));
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+
+  /* Pulse animation for critical patients */
+  /* tone down pulse animation for critical patients to a small outline flash */
+  .pulse-critical {
+    animation: pulse-critical 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-critical {
+    0%, 100% {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    50% {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+  }
+
+  /* Status indicators */
+  .status-online {
+    background: hsl(var(--success));
+  }
+
+  .status-offline {
+    background: hsl(var(--destructive));
+  }
+
+  /* Progress bar animation for success notification */
+  @keyframes progressBar {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+}
